@@ -1,10 +1,12 @@
 import {StyleSheet, View, Image, Text} from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import {Searchbar} from "react-native-paper";
 
 const image = require("../../assets/images/Pasta.png");
 
-export default function Hero() {
+export default function Hero({isSearchBarVisible, onSearchSubmit}) {
+    const [searchText, setSearchText] = useState("");
+
     return (
         <View style={styles.container}>
             <View style={styles.subContainer}>
@@ -16,16 +18,18 @@ export default function Hero() {
                 </View>
                 <Image source={image} style={styles.image}/>
             </View>
-            <Searchbar
+            {isSearchBarVisible && <Searchbar
                 placeholder="Search"
                 placeholderTextColor="#333333"
-                onChangeText={() => {}}
-                value={"Hallo Welt"}
+                onChangeText={(text) => {setSearchText(text)}}
+                value={searchText}
                 style={styles.searchBar}
                 iconColor="#333333"
                 inputStyle={{ color: "#333333" }}
                 elevation={5}
-            />
+                onIconPress={() => onSearchSubmit(searchText)}
+                onSubmitEditing={() => onSearchSubmit(searchText)}
+            />}
         </View>
     );
 }

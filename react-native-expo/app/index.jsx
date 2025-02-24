@@ -45,8 +45,8 @@ export default function Index() {
 
     return (
         <View style={{display: "flex", flex: 1}}>
-            <Header/>
-            <Hero/>
+            <Header isProfileLinkButtonVisible={true}/>
+            <Hero isSearchBarVisible={true} onSearchSubmit={searchText => setSearchQuery(searchText)}/>
             <Filters categories={CATEGORIES} activeCategories={activeCategories} onChange={(index) => {
                 setActiveCategories(getToggledCategories(activeCategories, index));
             }}/>

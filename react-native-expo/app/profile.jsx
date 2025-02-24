@@ -8,6 +8,7 @@ export default function Profile() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    const [telephone, setTelephone] = useState("");
 
     const loadProfile = () => {
         loadItem("profile")
@@ -15,6 +16,7 @@ export default function Profile() {
                 setFirstName(profile.firstName);
                 setLastName(profile.lastName);
                 setEmail(profile.email);
+                setTelephone(profile.telephone);
             });
     }
 
@@ -40,15 +42,20 @@ export default function Profile() {
                 value={email}
                 onChangeText={text => {setEmail(text)}}
             />
-            <Button mode="contained" onPress={() => logout()}>
-                Logout
+            <TextInput
+                label="Telephone number"
+                value={telephone}
+                onChangeText={text => {setTelephone(text)}}
+            />
+            <Button mode="contained" onPress={() => logout()} style={{backgroundColor: "#F4CE14"}}>
+                <Text style={{color: "#333333"}}>Logout</Text>
             </Button>
             <Button mode="contained" onPress={() => loadProfile()}>
                 Discard Changes
             </Button>
             <Button mode="contained"
-                    onPress={() => saveProfile(firstName, lastName, email)}
-                    disabled={!isInputValid(firstName, lastName, email)}>
+                    onPress={() => saveProfile(firstName, lastName, email, telephone)}
+                    disabled={!isInputValid(firstName, lastName, email, telephone)}>
                 Save Changes
             </Button>
         </View>
@@ -60,18 +67,19 @@ function logout() {
         .then(() => router.replace("/"));
 }
 
-function saveProfile(firstName, lastName, email) {
+function saveProfile(firstName, lastName, email, telephone) {
     const profile = {
         firstName: firstName,
         lastName: lastName,
         email: email,
+        telephone: telephone,
     }
     saveItem("profile", profile)
         .then(() => router.replace("/"));
 }
 
-function isInputValid(firstName, lastName, email) {
-    return firstName !== "" && lastName !== "" && isEmailValid(email);
+function isInputValid(firstName, lastName, email, telephone) {
+    return firstName !== "" && lastName !== "" && telephone !== "" && isEmailValid(email);
 }
 
 function isEmailValid(email) {

@@ -15,12 +15,12 @@ function ProfileLinkButton() {
     );
 }
 
-export default function Header() {
+export default function Header({isProfileLinkButtonVisible}) {
     return (
         <View style={styles.container}>
             <View style={styles.spacing}/>
             <Image source={logo}/>
-            <ProfileLinkButton/>
+            {isProfileLinkButtonVisible ? <ProfileLinkButton/> : <View style={styles.spacing}/>}
         </View>
     );
 }

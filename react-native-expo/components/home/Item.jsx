@@ -1,7 +1,19 @@
 import {StyleSheet, Text, View, Image} from "react-native";
 import React from "react";
 
-const image = require("../../assets/images/Bruschetta.png");
+const grilledFish = require("../../assets/images/Grilled fish.png");
+const lemonDessert = require("../../assets/images/Lemon dessert.png");
+
+function ItemImage({image}) {
+    // Some images have been removed from the server.
+    if (image === "lemonDessert.jpg" ) {
+        return <Image style={styles.image} source={lemonDessert}/>
+    }
+    if (image === "grilledFish.jpg" ) {
+        return <Image style={styles.image} source={grilledFish}/>
+    }
+    return <Image style={styles.image} source={{uri: `https://github.com/Meta-Mobile-Developer-PC/Working-With-Data-API/blob/main/images/${image}?raw=true`}}/>
+}
 
 export default function Item({item}) {
     return (
@@ -11,7 +23,7 @@ export default function Item({item}) {
                 <Text style={styles.description} numberOfLines={2}>{item.description}</Text>
                 <Text style={styles.price}>${item.price}</Text>
             </View>
-            <Image style={styles.image} source={image}/>
+            <ItemImage image={item.image}/>
         </View>
     );
 }

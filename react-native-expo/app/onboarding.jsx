@@ -10,12 +10,13 @@ export default function Onboarding() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    const [telephone, setTelephone] = useState("");
 
     return (
         <View style={styles.container}>
             <Header/>
             <Hero/>
-            <Text style={styles.headline}>Enter your personal information</Text>
+            <Text style={styles.headline}>Let us get to know you!</Text>
             <TextInput
                 label="First name"
                 value={firstName}
@@ -31,27 +32,33 @@ export default function Onboarding() {
                 value={email}
                 onChangeText={text => {setEmail(text)}}
             />
+            <TextInput
+                label="Telephone number"
+                value={telephone}
+                onChangeText={text => {setTelephone(text)}}
+            />
             <Button mode="contained"
-                    onPress={() => saveProfile(firstName, lastName, email)}
-                    disabled={!isInputValid(firstName, lastName, email)}>
+                    onPress={() => saveProfile(firstName, lastName, email, telephone)}
+                    disabled={!isInputValid(firstName, lastName, email, telephone)}>
                 Next
             </Button>
         </View>
     );
 }
 
-function saveProfile(firstName, lastName, email) {
+function saveProfile(firstName, lastName, email, telephone) {
     const profile = {
         firstName: firstName,
         lastName: lastName,
         email: email,
+        telephone: telephone,
     }
     saveItem("profile", profile)
         .then(() => router.replace("/"));
 }
 
-function isInputValid(firstName, lastName, email) {
-    return firstName !== "" && lastName !== "" && isEmailValid(email);
+function isInputValid(firstName, lastName, email, telephone) {
+    return firstName !== "" && lastName !== "" && telephone !== "" && isEmailValid(email);
 }
 
 function isEmailValid(email) {

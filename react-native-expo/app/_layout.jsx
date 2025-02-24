@@ -2,7 +2,6 @@ import {SplashScreen, Stack} from "expo-router";
 import {useFonts} from "expo-font";
 import {useEffect} from "react";
 import {DefaultTheme, PaperProvider} from "react-native-paper";
-import {loadItem} from "../services/LocalStorageService";
 
 export default function RootLayout() {
     const [loaded, error] = useFonts({
