@@ -15,8 +15,8 @@ import {
     getMenuItems,
     saveMenuItems,
     filterByQueryAndCategories, openDBConnection,
-} from '../../services/database';
-import Filters from '../../services/filters';
+} from '../../services/DatabaseService';
+import Filters from '../home/filters';
 import {getSectionListData, useUpdateEffect} from '../../services/utils';
 
 const API_URL =
