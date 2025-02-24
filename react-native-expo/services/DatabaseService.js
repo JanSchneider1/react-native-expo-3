@@ -32,7 +32,7 @@ export async function filterByQueryAndCategories(query, activeCategories) {
     let selectStatement = `select * from menuitems`;
     selectStatement += ` where category in (${activeCategories.map(category => `"${category}"`)})`;
     if (query.length > 0) {
-        selectStatement += ` and title like "%${query}%"`;
+        selectStatement += ` and name like "%${query}%"`;
     }
     return await db.getAllAsync(selectStatement);
 }

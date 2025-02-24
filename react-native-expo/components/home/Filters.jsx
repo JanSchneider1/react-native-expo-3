@@ -1,24 +1,24 @@
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
-export default function Filters({onChange, selections, sections}) {
+export default function Filters({onChange, activeCategories, categories}) {
     return (
         <View style={styles.filtersContainer}>
-            {sections.map((section, index) => (
+            {categories.map((category, index) => (
                 <TouchableOpacity
                     key={index}
                     onPress={() => onChange(index)}
                     style={{
-                        flex: 1 / sections.length,
+                        flex: 1 / categories.length,
                         justifyContent: 'center',
                         alignItems: 'center',
                         padding: 16,
-                        backgroundColor: selections[index] ? '#EE9972' : '#495E57',
+                        backgroundColor: activeCategories.includes(categories[index]) === true ? '#EE9972' : '#495E57',
                         borderWidth: 1,
                         borderColor: 'white',
                     }}>
                     <View>
-                        <Text style={{color: selections[index] ? 'black' : 'white'}}>
-                            {section}
+                        <Text style={{color: activeCategories.includes(categories[index]) === true ? 'black' : 'white'}}>
+                            {category}
                         </Text>
                     </View>
                 </TouchableOpacity>
